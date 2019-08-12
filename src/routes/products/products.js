@@ -1,8 +1,18 @@
-const allProducts = require("../../db/products/all-products.json");
+const path = require("path");
+const fs = require("fs");
 
 const productsRoute = (request, response) => {
-  response.writeHead(200, { "Content-Type": "application/json" });
-  response.end(JSON.stringify(allProducts));
+  const filePath = path.join(
+    __dirname,
+    "../../",
+    "db",
+    "products",
+    "all-products.json"
+  );
+
+  const readStream = fs.createReadStream(filePath);
+
+  readStream.pipe(response);
 };
 
 module.exports = productsRoute;
