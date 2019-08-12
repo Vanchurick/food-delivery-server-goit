@@ -10,9 +10,14 @@ const productsRoute = (request, response) => {
     "all-products.json"
   );
 
-  const readStream = fs.createReadStream(filePath);
+  let bufferData = fs.readFileSync(filePath);
 
-  readStream.pipe(response);
+  response.writeHead(200, {
+    "Content-Type": "application/json"
+  });
+
+  response.write(bufferData);
+  response.end();
 };
 
 module.exports = productsRoute;
