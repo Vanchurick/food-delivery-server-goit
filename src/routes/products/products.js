@@ -1,23 +1,22 @@
-const path = require("path");
-const fs = require("fs");
+const url = require("url");
+const getProducts = require("./getAllproducts");
+const getProductById = require("./getProductById");
+const getId = require("./services");
 
 const productsRoute = (request, response) => {
-  const filePath = path.join(
-    __dirname,
-    "../../",
-    "db",
-    "products",
-    "all-products.json"
-  );
+  const reqMethod = request.method;
+  const parsedUrl = url.parse(request.url);
+  const id = getId(parsedUrl.path);
 
-  const bufferData = fs.readFileSync(filePath);
+  if (!isNaN(id) && reqMethod === "GET") {
+    getProductById(request, response, id);
+    return;
+  }
 
-  response.writeHead(200, {
-    "Content-Type": "application/json"
-  });
-
-  response.write(bufferData);
-  response.end();
+  if (reqMethod === "GET") {
+    getProducts(request, response);
+    return;
+  }
 };
 
 module.exports = productsRoute;
