@@ -10,7 +10,7 @@ const productsRoute = (request, response) => {
     "all-products.json"
   );
 
-  let bufferData = fs.readFileSync(filePath);
+  const bufferData = fs.readFileSync(filePath);
 
   response.writeHead(200, {
     "Content-Type": "application/json"
