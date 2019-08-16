@@ -1,21 +1,12 @@
-const path = require("path");
-const fs = require("fs");
+const { handlePathToAllProducts } = require("./helpers");
 
 const getProductById = (request, response, id) => {
-  const filePath = path.join(
-    __dirname,
-    "../../",
-    "db",
-    "products",
-    "all-products.json"
-  );
+  const products = handlePathToAllProducts();
 
-  const bufferData = fs.readFileSync(filePath);
-
-  const products = JSON.parse(bufferData);
   const product = products.find(elem => elem.id === id);
+
   const resp = {
-    status: "success",
+    status: !product ? "no product" : "success",
     product
   };
 
