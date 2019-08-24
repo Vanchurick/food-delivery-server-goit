@@ -1,5 +1,6 @@
 const url = require("url");
-const { getIds, handlePathToAllProducts } = require("./helpers");
+const handlePathToAllProducts = require("../../helpers/getAllProducts");
+const getIds = require("../../helpers/getIds");
 
 const getFewProductsByIds = (req, res) => {
   const parsedURL = url.parse(req.url);
