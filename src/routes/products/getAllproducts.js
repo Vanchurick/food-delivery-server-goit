@@ -1,7 +1,7 @@
-const { handlePathToAllProducts } = require("./helpers");
+const getAllProducts = require("../../helpers/getAllProducts");
 
 const getProducts = (request, response) => {
-  const products = JSON.stringify(handlePathToAllProducts());
+  const products = JSON.stringify(getAllProducts());
 
   response.writeHead(200, {
     "Content-Type": "application/json"

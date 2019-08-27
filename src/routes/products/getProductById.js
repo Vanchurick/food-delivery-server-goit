@@ -1,7 +1,8 @@
-const { handlePathToAllProducts } = require("./helpers");
+const handlePathToAllProducts = require("../../helpers/getAllProducts");
 
-const getProductById = (request, response, id) => {
+const getProductById = (request, response) => {
   const products = handlePathToAllProducts();
+  const id = Number(request.params.id);
 
   const product = products.find(elem => elem.id === id);
 
